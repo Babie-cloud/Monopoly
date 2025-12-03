@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monopoly - Partie en cours</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../asset/css/style.css">
+</head>
+<body class="bg-monopoly">
+
+  <div class="container py-4">
+    <h2 class="text-center mb-4" style="color:#FF0800; text-shadow: 0 0 20px red;">Partie en cours - Tour du Joueur 1</h2>
+    
+    <div class="board mx-auto position-relative">
+
+      <!-- Centre -->
+      <div class="center"></div>
+
+      <!-- Coins -->
+      <div class="corner go"><div>DÉPART<br>+200 €</div></div>
+      <div class="corner free-parking"><div>PARC<br>GRATUIT</div></div>
+      <div class="corner jail"><div>PRISON<br>(Visite)</div></div>
+      <div class="corner go-to-jail"><div>ALLES EN<br>PRISON</div></div>
+
+      <!-- Cases du bas (11ème ligne) -->
+      <div class="property brown" style="grid-area:11/10;"><div>Rue de la Paix<br>400 €</div></div>
+      <div class="tax" style="grid-area:11/9;"><div>Taxe de luxe<br>100 €</div></div>
+      <div class="property darkblue" style="grid-area:11/8;"><div>Place du Parc<br>350 €</div></div>
+      <div class="chance" style="grid-area:11/7;"><div>CHANCE</div></div>
+      <div class="property darkblue" style="grid-area:11/6;"><div>Rue de la Paix<br>350 €</div></div>
+      <div class="station" style="grid-area:11/5;"><div>Gare de Lyon</div></div>
+      <div class="property green" style="grid-area:11/4;"><div>Avenue Mozart<br>320 €</div></div>
+      <div class="community-chest" style="grid-area:11/3;"><div>CAISSE<br>COMMUNAUTÉ</div></div>
+      <div class="property green" style="grid-area:11/2;"><div>Boulevard Malesherbes<br>300 €</div></div>
+
+      <!-- Côté gauche (11ème colonne) -->
+      <div class="property green left-side" style="grid-area:10/1;"><div>Avenue Henri-Martin<br>300 €</div></div>
+      <div class="property yellow left-side" style="grid-area:9/1;"><div>Avenue de Neuilly<br>280 €</div></div>
+      <div class="chance left-side" style="grid-area:8/1;"><div>CHANCE</div></div>
+      <div class="property yellow left-side" style="grid-area:7/1;"><div>Rue du Faubourg St-Honoré<br>260 €</div></div>
+      <div class="property yellow left-side" style="grid-area:6/1;"><div>Place de la Bourse<br>260 €</div></div>
+      <div class="station left-side" style="grid-area:5/1;"><div>Gare Saint-Lazare</div></div>
+      <div class="property red left-side" style="grid-area:4/1;"><div>Avenue de la République<br>240 €</div></div>
+      <div class="community-chest left-side" style="grid-area:3/1;"><div>CAISSE<br>COMMUNAUTÉ</div></div>
+      <div class="property red left-side" style="grid-area:2/1;"><div>Avenue de Breteuil<br>220 €</div></div>
+
+      <!-- Et je te laisse les autres côtés si tu veux, mais même sans c’est déjà beau ! -->
+
+      <!-- Ton pion -->
+      <img id="player-pion" src="" style="position:absolute; width:50px; bottom:10px; right:10px; z-index:100; transition: all 0.6s ease;">
+
+    </div>
+
+    <div class="text-center mt-4">
+      <button id="roll-dice" class="btn-monopoly ROLL px-5">Lancer les dés 🎲</button>
+      <p class="mt-3 fs-4">Argent : <span id="money">1500 €</span></p>
+      <p id="dice-result" class="fs-2 fw-bold text-danger"></p>
+    </div>
+  </div>
+
+  <script>
+    // Récupère le pion choisi
+    const pion = localStorage.getItem('pionChoisi');
+    document.getElementById('player-pion').src = `../asset/img/pion/${pion}.jpg`;
+
+    let position = 0; // case Départ
+    let money = 1500;
+
+    document.getElementById('roll-dice').addEventListener('click', () => {
+      const die1 = Math.floor(Math.random() * 6) + 1;
+      const die2 = Math.floor(Math.random() * 6) + 1;
+      const total = die1 + die2;
+      
+      document.getElementById('dice-result').textContent = `${die1} + ${die2} = ${total}`;
+
+      position = (position + total) % 40; // 40 cases
+
+      // Déplace le pion (simple mais trop stylé)
+      const boardSize = 900;
+      const cellSize = boardSize / 11;
+      let x, y;
+
+      if (position === 0) { x = boardSize - cellSize; y = boardSize - cellSize; } // Départ
+      else if (position < 10) { x = boardSize - cellSize * (position + 1); y = boardSize - cellSize; } // bas
+      else if (position < 20) { x = 0; y = boardSize - cellSize * (position - 9); } // gauche
+      else if (position < 30) { x = cellSize * (position - 19); y = 0; } // haut
+      else { x = boardSize - cellSize * (position - 28); y = cellSize; } // droite
+
+      document.getElementById('player-pion').style.left = x + 'px';
+      document.getElementById('player-pion').style.bottom = y + 'px';
+
+      // Passage par Départ
+      if (position + total >= 40 || (position < 10 && position + total >= 40)) {
+        money += 200;
+        alert("Tu passes par Départ ! +200 €");
+      }
+      document.getElementById('money').textContent = money + " €";
+    });
+  </script>
+
+</body>
+</html>

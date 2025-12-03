@@ -1,0 +1,200 @@
+/* ============================================= */
+/*    MONOPOLY CUSTOM - TON STYLE À 1000%       */
+/* ============================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Hammersmith+One:wght@400&family=Orbitron:wght@500;700&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Tes couleurs de base - on touche plus, c'est parfait */
+    --textfacile:     #A1C084;
+    --textnormal:     #60A561;
+    --textdifficile:  #051014;
+    --border:         #FF0000;
+    --monobox:        #D9D9D9;
+    --fond:           #355766ab;
+    --titre:          #FFF9F9;
+    --text:           #FFF9F9;
+    --dark:           #000000;
+    --text2:          #275624;
+    --accent:         #FF0000;
+    --hover-scale:    1.05;
+}
+
+/* Fond global */
+body.bg-monopoly {
+    background: linear-gradient(135deg, #051014 0%, #275624 50%, #355766ab 100%);
+    font-family: 'Hammersmith One', sans-serif;
+    color: var(--text);
+    min-height: 100vh;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* =================================== */
+/*              PLATEAU                */
+/* =================================== */
+
+.board {
+    width: 900px;
+    height: 900px;
+    background: var(--monobox);
+    border: 12px solid var(--border);
+    border-radius: 20px;
+    position: relative;
+    box-shadow: 0 0 60px rgba(255, 0, 0, 0.4),
+                inset 0 0 40px rgba(0, 0, 0, 0.6);
+    display: grid;
+    grid-template: repeat(11, 1fr) / repeat(11, 1fr);
+    overflow: hidden;
+}
+
+/* Coins stylisés */
+.corner {
+    background: var(--textdifficile);
+    border: 4px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    text-transform: uppercase;
+    color: white;
+    font-size: 14px;
+    text-shadow: 2px 2px 4px black;
+}
+
+.go              { grid-area: 11/11; background: linear-gradient(135deg, var(--textnormal), var(--textfacile)); }
+.free-parking     { grid-area: 1/1;   background: linear-gradient(135deg, gold, #ffaa00); color: black; }
+.jail             { grid-area: 1/11;  background: var(--textdifficile); }
+.go-to-jail       { grid-area: 11/1;  background: var(--border); }
+
+/* Cases normales */
+.property, .chance, .community-chest, .station, .utility, .tax {
+    border: 2px solid var(--border);
+    background: white;
+    position: relative;
+    overflow: hidden;
+    font-size: 10px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    text-align: center;
+}
+
+/* Bandeau couleur du groupe */
+.property::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 25px;
+    background: gray;
+}
+
+.brown::before      { background: #8B4513; }
+.lightblue::before  { background: #87CEEB; }
+.purple::before     { background: #D473D4; }
+.orange::before     { background: #FF8C00; }
+.red::before        { background: #E53935; }
+.yellow::before     { background: #FFEB3B; color: black; }
+.green::before      { background: #4CAF50; }
+.darkblue::before   { background: #1976D2; }
+
+/* Cases spéciales */
+.chance         { background: #FFA726; color: #E65100; font-weight: bold; }
+.community-chest{ background: #90CAF9; }
+.station        { background: #212121; color: white; }
+.utility        { background: #EEEEEE; }
+.tax            { background: var(--border); color: white; }
+
+/* Rotation côtés */
+.left-side  > div { transform: rotate(90deg); }
+.right-side > div { transform: rotate(-90deg); }
+
+/* Centre du plateau - le vrai kiff */
+.center {
+    grid-area: 2 / 2 / 11 / 11;
+    background: linear-gradient(45deg, var(--textdifficile), #051014);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+}
+
+.center::before {
+    content: "MONOPOLY";
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%) rotate(-25deg);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 120px;
+    font-weight: 700;
+    color: rgba(255, 0, 0, 0.15);
+    letter-spacing: 15px;
+    pointer-events: none;
+    text-shadow: 0 0 30px rgba(255,0,0,0.3);
+}
+
+/* Hover effet de ouf */
+.property:hover, .chance:hover, .community-chest:hover {
+    transform: scale(var(--hover-scale));
+    z-index: 10;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 20px var(--border);
+}
+
+/* Boutons custom */
+.btn-monopoly {
+    background: var(--border);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 50px;
+    font-family: 'Hammersmith One', sans-serif;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(255,0,0,0.4);
+}
+
+.btn-monopoly:hover {
+    background: white;
+    color: var(--border);
+    transform: translateY(-3px);
+}
+.pion-img {
+    width: 100%;
+    max-width: 120px;
+    border: 4px solid transparent;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.pion-img:hover {
+    transform: translateY(-15px) scale(1.1);
+    border-color: var(--border);
+    box-shadow: 0 20px 40px rgba(255,0,0,0.6);
+}
+
+.pion-img.selected {
+    border-color: var(--border) !important;
+    box-shadow: 0 0 30px var(--border);
+    transform: scale(1.2);
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .board { width: 95vw; height: 95vw; }
+    .center::before { font-size: 80px; }
+}

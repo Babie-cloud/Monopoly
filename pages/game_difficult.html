@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monopoly - Mode Difficile</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../asset/css/style.css">
+</head>
+<body class="bg-difficult">
+    <div class="container board mt-5">
+        <!-- Barre d'info joueur -->
+        <div class="row mb-3">
+            <div class="col-md-6 text-white">
+                <h3>Joueur 1: <span id="player-money">1000 €</span></h3>
+            </div>
+            <div class="col-md-6 text-end text-white">
+                <h3>Tour: 1</h3>
+            </div>
+        </div>
+
+        <!-- Ligne du haut -->
+        <div class="row justify-content-between">
+            <div class="col-2 corner free-parking">Free Parking</div>
+            <div class="col-8 d-flex justify-content-around">
+                <div class="property orange difficult-rule">Kentucky Ave £220</div>
+                <div class="property chance difficult-rule">Chance</div>
+                <div class="property orange difficult-rule">Indiana Ave £220</div>
+                <div class="property orange difficult-rule">Illinois Ave £240</div>
+                <div class="property station difficult-rule">B&O Railroad £200</div>
+                <div class="property red difficult-rule">Atlantic Ave £260</div>
+                <div class="property red difficult-rule">Ventnor Ave £260</div>
+                <div class="property utility difficult-rule">Water Works £150</div>
+                <div class="property red difficult-rule">Marvin Gardens £280</div>
+            </div>
+            <div class="col-2 corner go-to-jail">Go to Jail</div>
+        </div>
+
+        <!-- Côtés + centre -->
+        <div class="row sides">
+            <div class="col-2 left-side d-flex flex-column justify-content-around">
+                <div class="property yellow difficult-rule">Pacific Ave £300</div>
+                <div class="property yellow difficult-rule">North Carolina Ave £300</div>
+                <div class="property community difficult-rule">Community Chest</div>
+                <div class="property yellow difficult-rule">Pennsylvania Ave £320</div>
+                <div class="property station difficult-rule">Short Line £200</div>
+                <div class="property chance difficult-rule">Chance</div>
+                <div class="property green difficult-rule">Park Place £350</div>
+                <div class="property tax difficult-rule">Luxury Tax £100</div>
+                <div class="property green difficult-rule">Boardwalk £400</div>
+            </div>
+            <div class="col-8 center d-flex align-items-center justify-content-center position-relative">
+                <div class="logo">MONOPOLY</div>
+                <img src="../asset/img/chance.png" alt="Chance" class="cards chance-card">
+                <img src="../asset/img/community.png" alt="Community" class="cards community-card">
+                <img src="../asset/img/pion-chien.png" id="pion1" class="pion" style="position: absolute; bottom: 10px; right: 10px;">
+            </div>
+            <div class="col-2 right-side d-flex flex-column justify-content-around">
+                <div class="property pink difficult-rule">St. James Place £180</div>
+                <div class="property community difficult-rule">Community Chest</div>
+                <div class="property pink difficult-rule">Tennessee Ave £180</div>
+                <div class="property pink difficult-rule">New York Ave £200</div>
+                <div class="property station difficult-rule">Reading Railroad £200</div>
+                <div class="property orange difficult-rule">St. Charles Place £140</div>
+                <div class="property utility difficult-rule">Electric Company £150</div>
+                <div class="property orange difficult-rule">States Ave £140</div>
+                <div class="property orange difficult-rule">Virginia Ave £160</div>
+            </div>
+        </div>
+
+        <!-- Ligne du bas -->
+        <div class="row justify-content-between">
+            <div class="col-2 corner just-visiting">Just Visiting / In Jail</div>
+            <div class="col-8 d-flex justify-content-around">
+                <div class="property brown difficult-rule">Mediterranean Ave £60</div>
+                <div class="property community difficult-rule">Community Chest</div>
+                <div class="property brown difficult-rule">Baltic Ave £60</div>
+                <div class="property tax difficult-rule">Income Tax £200</div>
+                <div class="property station difficult-rule">Pennsylvania Railroad £200</div>
+                <div class="property light-blue difficult-rule">Oriental Ave £100</div>
+                <div class="property chance difficult-rule">Chance</div>
+                <div class="property light-blue difficult-rule">Vermont Ave £100</div>
+                <div class="property light-blue difficult-rule">Connecticut Ave £120</div>
+            </div>
+            <div class="col-2 corner go">GO! Collect £200</div>
+        </div>
+    </div>
+
+    <!-- Boutons actions -->
+    <div class="text-center mt-4">
+        <button id="roll-dice" class="btn btn-danger rounded-pill px-4">Rouler les dés</button>
+        <button id="buy-property" class="btn btn-success rounded-pill px-4" disabled>Acheter</button>
+        <button id="end-turn" class="btn btn-warning rounded-pill px-4" disabled>Fin de tour</button>
+        <button class="btn btn-connect rounded-pill px-4">Se connecter</button>
+    </div>
+
+    <!-- Modal Game Over -->
+    <div id="game-over" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content game-over-modal">
+                <div class="modal-header">
+                    <h5 class="modal-title">Game Over</h5>
+                </div>
+                <div class="modal-body">
+                    <p>Score: 87%</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../script.js"></script>
+    <script src="../game.js"></script>
+</body>
+</html>

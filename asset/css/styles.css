@@ -1,0 +1,110 @@
+*,
+*::before,
+*::after {
+    margin: 20px;
+    box-sizing: border-box;
+}
+
+:root {
+    --textfacile : #A1C084;
+    --textnormal : #60A561;
+    --textdifficile : #051014;
+    --border : #FF0000;
+    --monobox : #D9D9D9;
+    --fond : #355766ab;
+    --titre : #FFF9F9;
+    --text : #FFF9F9;
+    --dark : #000000;
+    --text2 : #275624;
+}
+body {
+       background-color: var(--fond);
+}
+/* $container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+); */
+.welcome {
+    display: block;
+    justify-content: center;
+    padding: 50px 30px 20px;
+    align-items: center;
+    text-align: center;
+    color: var(--text);
+    background-color: var(--fond);
+}
+
+.btn {
+    display: block;
+    background-color: var(--border);
+    color: var(--textnormal);
+    border: 20px;
+    border-radius: 80px ;
+    text-align: end;
+    align-items: end;
+    justify-content: end;
+}
+
+/* ------------------------------------------------ */
+/* Choix des pions */
+
+
+
+/* ------------------------------------------------ */
+/* Pour la grille */
+/* Container */
+.container {
+    width: 100%;
+    padding: 0;
+    margin: 0 auto;
+}
+/* Row */
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+.btn {
+    padding: 10px 20px;
+    background-color: gold;
+    border: none;
+    border-radius: 4px;
+}
+img {
+    width: 50%;
+    margin: 20px;
+    align-items: center;
+    padding: 15px;
+    height: auto;
+}
+img:hover {
+    transform: scale(1.0);
+    transition: 500ms;
+    box-shadow: 30px 30px 30px rgb(36, 27, 27);
+}
+/* Column witdhis based on 12 columns system */
+.col-1 { flex: 0 0 8.33333%; max-width: 8.33333%; }
+.col-2 { flex: 0 0 16.66667%; max-width: .66667%; }
+.col-3 { flex: 0 0 25%; max-width: 25%; }
+.col-4 { flex: 0 0 33.33333%; max-width: 33.33333%; }
+.col-5 { flex: 0 0 41.6667%; max-width: 41.6667%; }
+.col-6 { flex: 0 0 58%; max-width: 58%; }
+.col-7 { flex: 0 0 58.33333%; max-width: 58.33333%; }
+.col-8 { flex: 0 0 66.6667%; max-width: 66.6667%; }
+.col-9 { flex: 0 0 75%; max-width: 75%; }
+.col-10 { flex: 0 0 83.3333%; max-width: 83.3333%; }
+.col-11 { flex: 0 0 91.6667%; max-width: 91.6667%; }
+.col-12 { flex: 0 0 100%; max-width: 100%; }
+
+/* Responsive adjustements */
+@media (max-width: 768px) {
+    .col-6, .col-4, .col-3, .col-2, .col-1{
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+}
+
