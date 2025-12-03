@@ -1,119 +1,96 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monopoly - Mode Normal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../asset/css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Monopoly - Mode Normal</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../asset/css/style.css">
+  <style>
+    body { background: linear-gradient(135deg, #1a0000, #330000, #590000) !important; }
+    .board { border: 12px solid #ff3333; box-shadow: 0 0 50px rgba(255,51,51,0.6); }
+  </style>
 </head>
-<body class="bg-normal">
-    <div class="container board mt-5">
-        <!-- Barre d'info joueur -->
-        <div class="row mb-3">
-            <div class="col-md-6 text-white">
-                <h3>Joueur 1: <span id="player-money">1500 €</span></h3>
-            </div>
-            <div class="col-md-6 text-end text-white">
-                <h3>Tour: 1</h3>
-            </div>
-        </div>
+<body class="bg-monopoly" data-difficulty="normal">
+  <!-- Tout le contenu IDENTIQUE à game_easy.html, juste change :
+       - data-difficulty="normal"
+       - couleurs du titre en #ff3333 et text-warning
+       - alert-warning + texte adapté -->
+         <div class="container py-4">
+    <h2 class="text-center mb-4" style="color:#00ff9d; text-shadow: 0 0 20px #00ff9d;">
+      MONOPOLY <span style="color:#a8ffce;">[FACILE → MODE DÉTENTE]</span>
+      → Tour de <span id="current-player" style="color:#00ff9d;">Toi</span>
+    </h2>
 
-        <!-- Ligne du haut -->
-        <div class="row justify-content-between">
-            <div class="col-2 corner free-parking">Free Parking</div>
-            <div class="col-8 d-flex justify-content-around">
-                <div class="property orange normal-rule">Kentucky Ave £220</div>
-                <div class="property chance normal-rule">Chance</div>
-                <div class="property orange normal-rule">Indiana Ave £220</div>
-                <div class="property orange normal-rule">Illinois Ave £240</div>
-                <div class="property station normal-rule">B&O Railroad £200</div>
-                <div class="property red normal-rule">Atlantic Ave £260</div>
-                <div class="property red normal-rule">Ventnor Ave £260</div>
-                <div class="property utility normal-rule">Water Works £150</div>
-                <div class="property red normal-rule">Marvin Gardens £280</div>
-            </div>
-            <div class="col-2 corner go-to-jail">Go to Jail</div>
-        </div>
+    <div class="board mx-auto position-relative">
 
-        <!-- Côtés + centre -->
-        <div class="row sides">
-            <div class="col-2 left-side d-flex flex-column justify-content-around">
-                <div class="property yellow normal-rule">Pacific Ave £300</div>
-                <div class="property yellow normal-rule">North Carolina Ave £300</div>
-                <div class="property community normal-rule">Community Chest</div>
-                <div class="property yellow normal-rule">Pennsylvania Ave £320</div>
-                <div class="property station normal-rule">Short Line £200</div>
-                <div class="property chance normal-rule">Chance</div>
-                <div class="property green normal-rule">Park Place £350</div>
-                <div class="property tax normal-rule">Luxury Tax £100</div>
-                <div class="property green normal-rule">Boardwalk £400</div>
-            </div>
-            <div class="col-8 center d-flex align-items-center justify-content-center position-relative">
-                <div class="logo">MONOPOLY</div>
-                <img src="../asset/img/chance.png" alt="Chance" class="cards chance-card">
-                <img src="../asset/img/community.png" alt="Community" class="cards community-card">
-                <img src="../asset/img/pion-chien.png" id="pion1" class="pion" style="position: absolute; bottom: 10px; right: 10px;">
-            </div>
-            <div class="col-2 right-side d-flex flex-column justify-content-around">
-                <div class="property pink normal-rule">St. James Place £180</div>
-                <div class="property community normal-rule">Community Chest</div>
-                <div class="property pink normal-rule">Tennessee Ave £180</div>
-                <div class="property pink normal-rule">New York Ave £200</div>
-                <div class="property station normal-rule">Reading Railroad £200</div>
-                <div class="property orange normal-rule">St. Charles Place £140</div>
-                <div class="property utility normal-rule">Electric Company £150</div>
-                <div class="property orange normal-rule">States Ave £140</div>
-                <div class="property orange normal-rule">Virginia Ave £160</div>
-            </div>
-        </div>
+      <div class="center"></div>
 
-        <!-- Ligne du bas -->
-        <div class="row justify-content-between">
-            <div class="col-2 corner just-visiting">Just Visiting / In Jail</div>
-            <div class="col-8 d-flex justify-content-around">
-                <div class="property brown normal-rule">Mediterranean Ave £60</div>
-                <div class="property community normal-rule">Community Chest</div>
-                <div class="property brown normal-rule">Baltic Ave £60</div>
-                <div class="property tax normal-rule">Income Tax £200</div>
-                <div class="property station normal-rule">Pennsylvania Railroad £200</div>
-                <div class="property light-blue normal-rule">Oriental Ave £100</div>
-                <div class="property chance normal-rule">Chance</div>
-                <div class="property light-blue normal-rule">Vermont Ave £100</div>
-                <div class="property light-blue normal-rule">Connecticut Ave £120</div>
-            </div>
-            <div class="col-2 corner go">GO! Collect £200</div>
-        </div>
+      <!-- 4 COINS -->
+      <div class="corner go"><div>DÉPART<br>+200 €</div></div>
+      <div class="corner free-parking"><div>PARC<br>GRATUIT</div></div>
+      <div class="corner jail"><div>PRISON<br>(Visite)</div></div>
+      <div class="corner go-to-jail"><div>ALLES EN<br>PRISON</div></div>
+
+      <!-- BAS (11ème ligne) -->
+      <div class="property brown"      style="grid-area:11/10"><div>Boulevard de<br>Belleville<br>60 €</div></div>
+      <div class="community-chest"     style="grid-area:11/9"><div>CAISSE DE<br>COMMUNAUTÉ</div></div>
+      <div class="property brown"      style="grid-area:11/8"><div>Rue Lecourbe<br>60 €</div></div>
+      <div class="tax"                 style="grid-area:11/7"><div>Impôt sur<br>le revenu<br>200 €</div></div>
+      <div class="station"             style="grid-area:11/6"><div>Gare<br>Montparnasse<br>200 €</div></div>
+      <div class="property lightblue"  style="grid-area:11/5"><div>Rue de<br>Vaugirard<br>100 €</div></div>
+      <div class="chance"              style="grid-area:11/4"><div>CHANCE</div></div>
+      <div class="property lightblue"  style="grid-area:11/3"><div>Rue de<br>Courcelles<br>100 €</div></div>
+      <div class="property lightblue"  style="grid-area:11/2"><div>Avenue de la<br>République<br>120 €</div></div>
+
+      <!-- GAUCHE -->
+      <div class="property purple left-side"   style="grid-area:10/1"><div>Avenue Mozart<br>140 €</div></div>
+      <div class="utility left-side"           style="grid-area:9/1"><div>Compagnie<br>Électricité<br>150 €</div></div>
+      <div class="property purple left-side"   style="grid-area:8/1"><div>Boulevard de<br>la Villette<br>140 €</div></div>
+      <div class="property purple left-side"   style="grid-area:7/1"><div>Avenue de<br>Neuilly<br>160 €</div></div>
+      <div class="station left-side"           style="grid-area:6/1"><div>Gare de<br>Lyon<br>200 €</div></div>
+      <div class="property orange left-side"   style="grid-area:5/1"><div>Rue du<br>Paradis<br>180 €</div></div>
+      <div class="community-chest left-side"   style="grid-area:4/1"><div>CAISSE DE<br>COMMUNAUTÉ</div></div>
+      <div class="property orange left-side"   style="grid-area:3/1"><div>Avenue<br>Henri-Martin<br>180 €</div></div>
+      <div class="property orange left-side"   style="grid-area:2/1"><div>Place de la<br>Bourse<br>200 €</div></div>
+
+      <!-- HAUT -->
+      <div class="property red"       style="grid-area:1/2"><div>Boulevard<br>Malesherbes<br>220 €</div></div>
+      <div class="chance"             style="grid-area:1/3"><div>CHANCE</div></div>
+      <div class="property red"       style="grid-area:1/4"><div>Avenue de<br>Breteuil<br>220 €</div></div>
+      <div class="property red"       style="grid-area:1/5"><div>Avenue Foch<br>240 €</div></div>
+      <div class="station"            style="grid-area:1/6"><div>Gare du<br>Nord<br>200 €</div></div>
+      <div class="property yellow"    style="grid-area:1/7"><div>Avenue des<br>Champs-Élysées<br>260 €</div></div>
+      <div class="property yellow"    style="grid-area:1/8"><div>Rue de la Paix<br>260 €</div></div> <!-- correction nom -->
+      <div class="property yellow"    style="grid-area:1/9"><div>Avenue Matignon<br>280 €</div></div>
+      <div class="utility"            style="grid-area:1/10"><div>Compagnie<br>des Eaux<br>150 €</div></div>
+
+      <!-- DROITE -->
+      <div class="property green"     style="grid-area:2/11"><div>Boulevard des<br>Capucines<br>300 €</div></div>
+      <div class="community-chest"    style="grid-area:3/11"><div>CAISSE DE<br>COMMUNAUTÉ</div></div>
+      <div class="property green"     style="grid-area:4/11"><div>Avenue Mozart<br>300 €</div></div>
+      <div class="station"            style="grid-area:5/11"><div>Gare<br>Saint-Lazare<br>200 €</div></div>
+      <div class="property green"     style="grid-area:6/11"><div>Rue de la Paix<br>320 €</div></div>
+      <div class="chance"             style="grid-area:7/11"><div>CHANCE</div></div>
+      <div class="property darkblue"  style="grid-area:8/11"><div>Place du Parc<br>350 €</div></div>
+      <div class="tax"                style="grid-area:9/11"><div>Taxe de<br>luxe<br>100 €</div></div>
+      <div class="property darkblue"  style="grid-area:10/11"><div>Rue de la Paix<br>400 €</div></div>
+
+      <!-- PIONS -->
+      <img id="pion-0" class="position-absolute" style="width:65px; bottom:15px; right:15px; z-index:100; transition:all 0.8s ease;" alt="Joueur">
+      <img id="pion-1" class="position-absolute" style="width:65px; bottom:15px; right:90px; z-index:100; transition:all 0.8s ease;" src="../asset/img/pion/chat.jpg" alt="IA">
     </div>
 
-    <!-- Boutons actions -->
     <div class="text-center mt-4">
-        <button id="roll-dice" class="btn btn-danger rounded-pill px-4">Rouler les dés</button>
-        <button id="buy-property" class="btn btn-success rounded-pill px-4" disabled>Acheter</button>
-        <button id="end-turn" class="btn btn-warning rounded-pill px-4" disabled>Fin de tour</button>
-        <button class="btn btn-connect rounded-pill px-4">Se connecter</button>
+      <button id="roll-dice" class="btn-monopoly px-5 py-3 fs-2">Lancer les dés</button>
+      <p class="mt-3 fs-2 text-light">Toi : <span id="money-player0">1500 €</span> | IA : <span id="money-player1">1500 €</span></p>
+      <p id="dice-result" class="fs-1 fw-bold text-success mt-3"></p>
     </div>
 
-    <!-- Modal Game Over -->
-    <div id="game-over" class="modal fade">
-        <div class="modal-dialog">
-            <div class="modal-content game-over-modal">
-                <div class="modal-header">
-                    <h5 class="modal-title">Game Over</h5>
-                </div>
-                <div class="modal-body">
-                    <p>Score: 87%</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">OK</button>
-                </div>
-            </div>
-        </div>
+    <div class="alert alert-success bg-success bg-opacity-20 border-success mt-4 text-center fs-4">
+      Règles FACILE : IA achète rarement · Pas de maisons · Pas de triche · Tu vas gagner tranquille
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="../script.js"></script>
-    <script src="../game.js"></script>
+  </div>
+  <!-- Je te le copie pas 2 fois, tu changes juste ces lignes dans le fichier easy → normal -->
 </body>
 </html>
